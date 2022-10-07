@@ -156,6 +156,22 @@
     <Compile Include="main.cpp">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="pin\pin.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="pin\pin.hpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="remote\remote.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="remote\remote.hpp">
+      <SubType>compile</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="pin" />
+    <Folder Include="remote" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
