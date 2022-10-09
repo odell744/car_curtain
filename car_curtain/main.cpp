@@ -9,7 +9,7 @@ int main(void)
 								  atmega8::port_c_1, // B
 								  atmega8::port_none, // C
 								  atmega8::port_none);// D
-    while (1) 
+    while (true) 
     {
 		
     }
