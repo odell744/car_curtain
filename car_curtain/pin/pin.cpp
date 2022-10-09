@@ -9,6 +9,9 @@ namespace atmega8
 		m_id(pin_id),
 		m_mode(mode)
 	{
+		if (m_id == port_none)
+			return;
+		
 		int	 l_port = (int)m_id / 8;
 		char l_pin_mask = (1 << m_id);
 		switch (m_mode)
@@ -17,18 +20,18 @@ namespace atmega8
 			{
 				switch (l_port)
 				{
-					case PORTB: { DDRB &= ~l_pin_mask; } break;
-					case PORTC: { DDRC &= ~l_pin_mask; } break;
-					case PORTD: { DDRD &= ~l_pin_mask; } break;
+					case 0: { DDRB &= ~l_pin_mask; } break;
+					case 1: { DDRC &= ~l_pin_mask; } break;
+					case 2: { DDRD &= ~l_pin_mask; } break;
 				}
 			} break;
 			case write_mode:
 			{
 				switch (l_port)
 				{
-					case PORTB: { DDRB |= l_pin_mask; } break;
-					case PORTC: { DDRC |= l_pin_mask; } break;
-					case PORTD: { DDRD |= l_pin_mask; } break;
+					case 0: { DDRB |= l_pin_mask; } break;
+					case 1: { DDRC |= l_pin_mask; } break;
+					case 2: { DDRD |= l_pin_mask; } break;
 				}
 			} break;
 		}
@@ -36,36 +39,42 @@ namespace atmega8
 
 	void pin::set_state(bool state)
 	{
+		if (m_id == port_none)
+			return;
+		
 		int	 l_port = (int)m_id / 8;
 		char l_pin_mask = (1 << m_id);
 		if (state)
 		{
 			switch (l_port)
 			{
-				case PORTB: { PORTB |= l_pin_mask; } break;
-				case PORTC: { PORTC |= l_pin_mask; } break;
-				case PORTD: { PORTD |= l_pin_mask; } break;
+				case 0: { PORTB |= l_pin_mask; } break;
+				case 1: { PORTC |= l_pin_mask; } break;
+				case 2: { PORTD |= l_pin_mask; } break;
 			}
-			} else {
+		} else {
 			switch (l_port)
 			{
-				case PORTB: { PORTB &= ~l_pin_mask; } break;
-				case PORTC: { PORTC &= ~l_pin_mask; } break;
-				case PORTD: { PORTD &= ~l_pin_mask; } break;
+				case 0: { PORTB &= ~l_pin_mask; } break;
+				case 1: { PORTC &= ~l_pin_mask; } break;
+				case 2: { PORTD &= ~l_pin_mask; } break;
 			}
 		}
 	}
 
 	bool pin::get_state()
 	{
+		if (m_id == port_none)
+			return false;
+		
 		int	 l_port = (int)m_id / 8;
 		char l_pin_mask = (1 << m_id);
 		
 		switch (l_port)
 		{
-			case PORTB: { return PORTB & l_pin_mask; };
-			case PORTC: { return PORTC & l_pin_mask; };
-			case PORTD: { return PORTD & l_pin_mask; };
+			case 0: { return PORTB & l_pin_mask; };
+			case 1: { return PORTC & l_pin_mask; };
+			case 2: { return PORTD & l_pin_mask; };
 		}
 		return false;
 	}

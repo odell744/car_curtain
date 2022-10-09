@@ -15,6 +15,7 @@ namespace atmega8
 	};
 	enum e_pin_id
 	{
+		port_none = -1,
 		port_b_0 = 0,
 		port_b_1 = 1,
 		port_b_2 = 2,
@@ -44,10 +45,10 @@ namespace atmega8
 
 	class pin
 	{
-		private:
+	private:
 		e_pin_id	m_id;
 		e_pin_mode	m_mode;
-		public:
+	public:
 		pin(e_pin_id pin_id, e_pin_mode mode);
 
 		void	   set_state(bool state);
